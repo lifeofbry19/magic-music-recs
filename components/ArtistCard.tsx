@@ -13,7 +13,7 @@ export default function ArtistCard({ artist }: { artist: Artist }) {
       <div>
         <h2>Artist name</h2>
         <button className="rounded-full h-12  flex justify-center items-center bg-indigo-700 text-white text-xl">
-          Get Recommendations
+          Get Recommendations for Similar Artists
         </button>
       </div>
     </div>
