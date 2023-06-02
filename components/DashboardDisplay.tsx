@@ -2,7 +2,7 @@
 import { SignOutButton } from "./Buttons";
 import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
-import PlaylistsDisplay from "./PlaylistsDisplay";
+import PlaylistsDisplay from "./TopArtistsDisplay";
 import TopTracksDisplay from "./TopTracksDisplay";
 
 interface Props {
@@ -54,7 +54,7 @@ export default function DashboardDisplay({ user }: Props) {
 
   return (
     <div>
-      <div className="w-full flex justify-between items-center">
+      <div className="w-full flex flex-col lg:flex-row justify-between gap-2 p-5 items-center">
         <h1 className="text-3xl font-bold">
           Hello, {session?.user && session?.user.name} Here are your top artists{" "}
         </h1>

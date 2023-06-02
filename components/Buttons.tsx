@@ -30,6 +30,29 @@ export function SignInButton() {
   );
 }
 
+export function DiscoverButton() {
+  const { data: session, status } = useSession();
+
+  if (status === "authenticated") {
+    return (
+      <Link href={`/discover`}>
+        <div className=" rounded-md h-12 p-2 flex justify-center items-center bg-indigo-700 text-white text-xl">
+          Discover New Music
+        </div>
+      </Link>
+    );
+  }
+
+  return (
+    <button
+      className="h-12 w-20 rounded-md bg-indigo-700 text-white"
+      onClick={() => signIn("spotify")}
+    >
+      Sign In
+    </button>
+  );
+}
+
 export function SignOutButton() {
   const { data: session, status } = useSession();
 

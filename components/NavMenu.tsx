@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { SignInButton, SignOutButton } from "./Buttons";
+import { SignInButton, DiscoverButton } from "./Buttons";
 import Image from "next/image";
 
 export default function NavMenu() {
@@ -13,6 +13,7 @@ export default function NavMenu() {
           height={50}
         />
       </Link>
+      <DiscoverButton />
       <ul className="flex justify-center text-black gap-5 items-center mr-5">
         <li>
           <SignInButton />

@@ -1,6 +1,6 @@
 import Image from "next/image";
 
-export default function PlaylistsDisplay({ artists }: { artists: any[] }) {
+export default function TopArtistsDisplay({ artists }: { artists: any[] }) {
   return (
     <div className="flex flex-col max-w-7xl lg:flex-row gap-5 mt-10 flex-wrap">
       {artists.map((artist) => {
