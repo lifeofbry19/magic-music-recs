@@ -43,14 +43,7 @@ export function DiscoverButton() {
     );
   }
 
-  return (
-    <button
-      className="h-12 w-20 rounded-md bg-indigo-700 text-white"
-      onClick={() => signIn("spotify")}
-    >
-      Sign In
-    </button>
-  );
+  return <></>;
 }
 
 export function SignOutButton() {

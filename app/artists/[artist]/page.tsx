@@ -3,16 +3,16 @@ import { SignInButton, SignOutButton } from "@/components/Buttons";
 import { getServerSession } from "next-auth";
 import ArtistPreview from "@/components/ArtistPreview";
 
-async function getPlaylists(session) {
-  const response = await fetch("/api/playlists", {
-    method: "GET",
-    headers: {
-      Authorization: `Bearer ${session.accessToken}`,
-    },
-  });
-  const data = await response.json();
-  return data;
-}
+// async function getPlaylists(session) {
+//   const response = await fetch("/api/playlists", {
+//     method: "GET",
+//     headers: {
+//       Authorization: `Bearer ${session.accessToken}`,
+//     },
+//   });
+//   const data = await response.json();
+//   return data;
+// }
 
 export default async function Dashboard() {
   const session = await getServerSession();

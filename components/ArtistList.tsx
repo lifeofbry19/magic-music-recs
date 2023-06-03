@@ -2,8 +2,8 @@ import ArtistCard from "./ArtistCard";
 
 interface Artist {
   name: string;
-  imageUrl: string;
-  id: string;
+  image: string;
+  id?: string;
 }
 
 interface Props {
@@ -12,10 +12,10 @@ interface Props {
 
 export default function ArtistList({ artists }: Props) {
   return (
-    <>
+    <div className="flex flex-wrap gap-2">
       {artists.map((artist) => (
         <ArtistCard artist={artist} />
       ))}
-    </>
+    </div>
   );
 }
