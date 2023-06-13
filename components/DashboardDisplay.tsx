@@ -4,6 +4,7 @@ import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 import PlaylistsDisplay from "./TopArtistsDisplay";
 import TopTracksDisplay from "./TopTracksDisplay";
+import { mockData } from "./MockData";
 
 interface Props {
   user: {
@@ -16,7 +17,7 @@ interface Props {
 export default function DashboardDisplay({ user }: Props) {
   const { data: session, status } = useSession();
   const [artists, setArtists] = useState(null);
-  const [tracks, setTracks] = useState(null);
+  const [tracks, setTracks] = useState(mockData);
 
   useEffect(() => {
     async function getPlaylists() {
@@ -55,9 +56,9 @@ export default function DashboardDisplay({ user }: Props) {
   return (
     <div>
       <div className="w-full flex flex-col lg:flex-row justify-between gap-2 p-5 items-center">
-        <h1 className="text-3xl font-bold">
+        {/* <h1 className="text-3xl font-bold">
           Hello, {session?.user && session?.user.name} Here are your top artists{" "}
-        </h1>
+        </h1> */}
         <SignOutButton />
       </div>
       {artists && <PlaylistsDisplay artists={artists} />}
