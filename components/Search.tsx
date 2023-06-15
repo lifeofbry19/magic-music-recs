@@ -16,9 +16,6 @@ export default function Search({ query, setQuery }: any) {
         placeholder="Search for an artist"
         className="h-12 p-2 rounded-md"
       />
-      <button className="h-12 p-2 text-center rounded-md bg-green-500">
-        Search Artists
-      </button>
     </div>
   );
 }

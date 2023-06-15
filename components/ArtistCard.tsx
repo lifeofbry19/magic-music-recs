@@ -2,14 +2,14 @@ import Image from "next/image";
 
 interface Artist {
   name: string;
-  image: string;
+  images: [{ url: string }];
   id?: string;
 }
 
-export default function ArtistCard({ artist }: { artist: Artist }) {
+export default function ArtistCard({ artist }: { artist: any }) {
   return (
     <div className="flex items-center gap-5 border-t-2 p-4 border-2 border-white">
-      <Image width={200} height={200} alt="artist" src={artist.image} />
+      <img width={200} height={200} alt="artist" src={artist.images[0]?.url} />
       <div></div>
       <div className="flex flex-col h-full justify-between items-start">
         <h2 className="text-2xl ">{artist.name}</h2>
