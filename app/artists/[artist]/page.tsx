@@ -1,4 +1,3 @@
-//@ts-nocheck
 import { SignInButton, SignOutButton } from "@/components/Buttons";
 import { getServerSession } from "next-auth";
 import ArtistPreview from "@/components/ArtistPreview";

@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 
 interface Artist {
   name: string;
@@ -13,9 +14,11 @@ export default function ArtistCard({ artist }: { artist: any }) {
       <div></div>
       <div className="flex flex-col h-full justify-between items-start">
         <h2 className="text-2xl ">{artist.name}</h2>
-        <button className="rounded-md h-12 p-2  flex justify-center items-center bg-indigo-700 text-white text-xl">
-          Get Recommendations for Similar Artists
-        </button>
+        <Link href={`/discover/${artist.id}`}>
+          <button className="rounded-md h-12 p-2  flex justify-center items-center bg-indigo-700 text-white text-xl">
+            Get Recommendations for Similar Artists
+          </button>
+        </Link>
       </div>
     </div>
   );

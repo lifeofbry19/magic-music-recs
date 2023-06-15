@@ -1,15 +1,13 @@
-"use clietnt";
+"use client";
 
 export default function Search({ query, setQuery }: any) {
-  const getArtistsList = async () => {
-    // fetch artists using search query
-  };
   return (
     <div className="flex justify-center items-center gap-5">
       <input
         onChange={(e) => {
           setQuery(e.target.value);
         }}
+        value={query}
         type="text"
         width="100"
         height="50"
