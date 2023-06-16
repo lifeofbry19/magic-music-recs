@@ -36,10 +36,13 @@ export default function DiscoverDisplay() {
   }, [session, query]);
   return (
     <div className="w-full flex flex-col   gap-2 p-5 items-center">
-      <Search query={query} setQuery={setQuery} setArtists={setArtists} />
-      <button className="h-12 p-2 text-center rounded-md bg-green-500">
-        Search Artists
-      </button>
+      <div className="flex flex-col sm:flex-row gap-5 justify-center items-center">
+        {" "}
+        <Search query={query} setQuery={setQuery} setArtists={setArtists} />
+        <button className="h-12 p-2 text-center rounded-md bg-green-500">
+          Search Artists
+        </button>
+      </div>
       {artists && <ArtistList artists={artists} />}
     </div>
   );

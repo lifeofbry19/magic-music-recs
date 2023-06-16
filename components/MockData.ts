@@ -13,4 +13,6 @@ export const mockData = [
     artist: "Lynyrd Skynyrd",
     image: "/lynyrd.png",
   },
+  { artist: "The Kinks", image: "/the-kinks.png" },
+  { artist: "ACDC", image: "/acdc.png" },
 ];
