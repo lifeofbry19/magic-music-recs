@@ -1,0 +1,17 @@
+export const carouselData = [
+  { url: "https://i.scdn.co/image/ab6761610000e5eb31f6ab67e6025de876475814" },
+  { url: "https://i.scdn.co/image/207803ce008388d3427a685254f9de6a8f61dc2e" },
+  { url: "https://i.scdn.co/image/ab6761610000e5ebe9348cc01ff5d55971b22433" },
+  { url: "https://i.scdn.co/image/ab6761610000e5eba03696716c9ee605006047fd" },
+  { url: "https://i.scdn.co/image/ab6761610000e5eb437b9e2a82505b3d93ff1022" },
+  { url: "https://i.scdn.co/image/e69f71e2be4b67b82af90fb8e9d805715e0684fa" },
+  { url: "https://i.scdn.co/image/ab6761610000e5ebd3cb15a8570cce5a63af63d8" },
+  { url: "https://i.scdn.co/image/84282c28d851a700132356381fcfbadc67ff498b" },
+  { url: "https://i.scdn.co/image/ab6761610000e5ebd2e2b04b7ba5d60b72f54506" },
+  { url: "https://i.scdn.co/image/ab6761610000e5ebf4b3dc0c23f34e31a2e01c4a" },
+  { url: "https://i.scdn.co/image/ab6761610000e5eb249d55f2d68a44637905c57e" },
+  { url: "https://i.scdn.co/image/ab6761610000e5ebd8475001d2700686e1008dfb" },
+  { url: "https://i.scdn.co/image/ab6761610000e5eb69ca98dd3083f1082d740e44" },
+  { url: "https://i.scdn.co/image/ab6761610000e5ebc5733401b4689b2064458e7d" },
+  { url: "https://i.scdn.co/image/ab6761610000e5ebe28a4fa6587f284f492a4b4f" },
+];

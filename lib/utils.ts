@@ -23,6 +23,5 @@ export async function fetchRelatedArtists(artistId: string) {
 
 export function getRandomArtist(arr: Array<T>) {
   const randomIdx = Math.random() * arr.length - 1;
-  console.log(arr, randomIdx);
   return arr[Math.floor(randomIdx)];
 }

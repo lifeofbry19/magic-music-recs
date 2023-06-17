@@ -2,6 +2,7 @@ import Image from "next/image";
 import NavMenu from "@/components/NavMenu";
 import HomeCarousel from "@/components/HomeCarousel";
 import { mockData } from "@/components/MockData";
+import { carouselData } from "@/lib/carouselData";
 
 interface Props {
   params: any;
@@ -14,7 +15,7 @@ export default function Home({ params }: Props) {
       <p className="text-xl ">
         <em>discover new artists closest to the music you already love</em>
       </p>
-      <HomeCarousel items={mockData} />
+      <HomeCarousel items={carouselData} />
     </main>
   );
 }

@@ -3,12 +3,11 @@ import Image from "next/image";
 import { useSpringCarousel } from "react-spring-carousel";
 import { useState, useEffect } from "react";
 
-type Artist = {
-  artist: string;
-  image: string;
+type ArtistImage = {
+  url: string;
 };
 
-export default function HomeCarousel({ items }: { items: Artist[] }) {
+export default function HomeCarousel({ items }: { items: ArtistImage[] }) {
   const [activeIdx, setActiveIdx] = useState(0);
   const {
     carouselFragment,
@@ -20,23 +19,22 @@ export default function HomeCarousel({ items }: { items: Artist[] }) {
 
     //@ts-ignore
     items: items
-      ? items.map((item: Artist, idx: number) => ({
+      ? items.map((item: ArtistImage, idx: number) => ({
           id: idx,
           renderItem: (
             <div className="w-full mx-2" key={idx}>
               <div className="mt-16">
                 <div className="mb-2">
-                  {item.image && (
+                  {item.url && (
                     <img
                       placeholder="blur"
-                      src={item.image}
-                      alt={item.artist}
+                      src={item.url}
+                      alt=""
                       width={200}
                       height={150}
                     />
                   )}
                 </div>
-                {item?.artist && <i>{item.artist}</i>}
               </div>
             </div>
           ),

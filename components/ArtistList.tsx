@@ -12,7 +12,7 @@ interface Props {
 
 export default function ArtistList({ artists }: Props) {
   return (
-    <div className="flex flex-wrap gap-2">
+    <div className="flex flex-wrap w-full gap-5">
       {artists.map((artist) => (
         <ArtistCard artist={artist} />
       ))}

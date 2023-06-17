@@ -36,7 +36,7 @@ export function DiscoverButton() {
   if (status === "authenticated") {
     return (
       <Link href={`/discover`}>
-        <div className=" rounded-md h-12 p-2 flex justify-center items-center bg-indigo-700 text-white text-xl">
+        <div className=" rounded-md h-12 p-1 flex justify-center items-center bg-indigo-700 text-white text-xl">
           Discover New Music
         </div>
       </Link>
@@ -52,10 +52,7 @@ export function SignOutButton() {
   if (status === "unauthenticated") return <></>;
 
   return (
-    <button
-      className="h-12 w-20 rounded-md bg-indigo-600 "
-      onClick={() => signOut()}
-    >
+    <button className="p-2 rounded-md bg-indigo-600 " onClick={() => signOut()}>
       Sign Out
     </button>
   );

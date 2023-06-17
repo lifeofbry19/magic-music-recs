@@ -31,7 +31,7 @@ export default function DashboardDisplay({ user }: Props) {
         }
       );
       const data = await response.json();
-      console.log(data);
+
       return data;
     }
 
@@ -43,7 +43,7 @@ export default function DashboardDisplay({ user }: Props) {
         },
       });
       const data = await response.json();
-      console.log(data);
+
       return data;
     }
 
