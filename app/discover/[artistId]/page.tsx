@@ -1,4 +1,4 @@
-import RelatedArtist from "@/components/RelatedArtist";
+import RelatedArtist from "@/components/related-artist/RelatedArtist";
 
 type Props = {
   params: { artistId: string };

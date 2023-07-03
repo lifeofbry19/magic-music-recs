@@ -3,6 +3,7 @@ import Image from "next/image";
 import { useState } from "react";
 import TrackPreview from "./TrackPreview";
 
+// TO DO: pass in audio player ref to play the track on click
 export default function TracksDisplay({ tracks }: { tracks: any[] }) {
   const [selectedTrackIdx, setSelectedTrackIdx] = useState(null);
   return (

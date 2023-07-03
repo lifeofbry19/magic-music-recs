@@ -1,4 +1,4 @@
-import DiscoverDisplay from "@/components/DiscoverDisplay";
+import DiscoverDisplay from "@/components/discover/DiscoverDisplay";
 
 export default function Discover() {
   return (

@@ -2,7 +2,7 @@
 import { useCallback, useState } from "react";
 import Search from "./Search";
 import ArtistList from "./ArtistList";
-import { mockData } from "./MockData";
+import { mockData } from "../../utils/MockData";
 import { useSession } from "next-auth/react";
 import { useEffect } from "react";
 import debounce from "lodash/debounce";

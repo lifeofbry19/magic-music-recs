@@ -1,7 +1,7 @@
 //@ts-nocheck
-import { SignInButton, SignOutButton } from "@/components/Buttons";
+import { SignInButton, SignOutButton } from "@/components/navigation/Buttons";
 import { getServerSession } from "next-auth";
-import DashboardDisplay from "@/components/DashboardDisplay";
+import DashboardDisplay from "@/components/dashboard/DashboardDisplay";
 
 async function getPlaylists(session) {
   const response = await fetch("/api/playlists", {

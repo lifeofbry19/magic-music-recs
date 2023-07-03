@@ -1,7 +1,7 @@
 import Image from "next/image";
-import NavMenu from "@/components/NavMenu";
-import HomeCarousel from "@/components/HomeCarousel";
-import { mockData } from "@/components/MockData";
+import NavMenu from "@/components/navigation/NavMenu";
+import HomeCarousel from "@/components/home/HomeCarousel";
+import { mockData } from "@/utils/MockData";
 import { carouselData } from "@/lib/carouselData";
 
 interface Props {

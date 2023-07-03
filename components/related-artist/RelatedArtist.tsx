@@ -1,7 +1,7 @@
 //@ts-nocheck
 "use client";
 import { useSession } from "next-auth/react";
-import { useEffect, useState, useCallback } from "react";
+import { useEffect, useState, useCallback, useRef } from "react";
 import debounce from "lodash/debounce";
 import Link from "next/link";
 import { getRandomArtist } from "@/lib/utils";
@@ -29,6 +29,7 @@ export default function RelatedArtist({ id }: { id: Id }) {
   const [tracks, setTracks] = useState<Tracks>(null);
   const [relatedArtistId, setRelatedArtistId] = useState(null);
   const [selectedTrack, setSelectedTrack] = useState(null);
+  const playerRef = useRef(null);
 
   //if (status === "loading") return <>Loading...</>;
 
@@ -62,22 +63,22 @@ export default function RelatedArtist({ id }: { id: Id }) {
     setTracks(json.tracks);
   }
 
-  const debouncedGetRelatedArtists = useCallback(
-    debounce(getRelatedArtists, 1500),
-    []
-  );
-  const debouncedGetTracks = useCallback(debounce(getArtistTracks, 1500), []);
+  // const debouncedGetRelatedArtists = useCallback(
+  //   debounce(getRelatedArtists, 1500),
+  //   []
+  // );
+  // const debouncedGetTracks = useCallback(debounce(getArtistTracks, 1500), []);
 
   useEffect(() => {
     if (artist) return;
     if (session && id) {
-      debouncedGetRelatedArtists(id);
+      getRelatedArtists(id);
     }
   }, [session, id]);
   useEffect(() => {
     if (tracks) return;
     if (session && relatedArtistId) {
-      debouncedGetTracks(relatedArtistId);
+      getArtistTracks(relatedArtistId);
     }
   }, [session, relatedArtistId]);
 
@@ -91,8 +92,8 @@ export default function RelatedArtist({ id }: { id: Id }) {
   return (
     <div className="mt-10 w-full ">
       <img
-        width={400}
-        height={400}
+        width={300}
+        height={300}
         alt="artist"
         src={artist.images[0].url || ""}
       />
@@ -114,7 +115,11 @@ export default function RelatedArtist({ id }: { id: Id }) {
             tracks?.map((track: Track) => {
               return (
                 <div
-                  onClick={() => setSelectedTrack(track)}
+                  onClick={() => {
+                    playerRef.current.src = selectedTrack.preview_url;
+                    playerRef.current.play();
+                    setSelectedTrack(track);
+                  }}
                   className="flex gap-5 cursor-pointer flex-col border hover:bg-gray-900 hover:bg-opacity-70 w-full sm:flex-row items-center p-5"
                 >
                   <svg
@@ -131,6 +136,7 @@ export default function RelatedArtist({ id }: { id: Id }) {
                   >
                     <polygon points="5 3 19 12 5 21 5 3" />
                   </svg>
+                  <img height={75} width={75} src={track.album.images[0].url} />
                   <h3 className="text-white text-xl">{track.name}</h3>
                 </div>
               );
@@ -140,7 +146,11 @@ export default function RelatedArtist({ id }: { id: Id }) {
       {/* Audio Player */}
       <div className="w-screen z-50   fixed  p-5 bg-opacity-60 bottom-0 left-0 justify-center gap-12 h-16 bg-black flex flex-col sm:flex-row items-center">
         <h3 className="text-xl">{selectedTrack?.name || ""}</h3>
-        <audio controls src={selectedTrack?.preview_url || ""}></audio>
+        <audio
+          ref={playerRef}
+          controls
+          src={selectedTrack?.preview_url || ""}
+        ></audio>
       </div>
     </div>
   );

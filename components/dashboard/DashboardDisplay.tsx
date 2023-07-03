@@ -1,10 +1,10 @@
 "use client";
-import { SignOutButton } from "./Buttons";
+import { SignOutButton } from "../navigation/Buttons";
 import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 import PlaylistsDisplay from "./TopArtistsDisplay";
-import TopTracksDisplay from "./TopTracksDisplay";
-import { mockData } from "./MockData";
+import TopTracksDisplay from "../TopTracksDisplay";
+import { mockData } from "../../utils/MockData";
 
 interface Props {
   user: {
