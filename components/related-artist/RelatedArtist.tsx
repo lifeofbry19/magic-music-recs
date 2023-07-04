@@ -84,32 +84,59 @@ export default function RelatedArtist({ id }: { id: Id }) {
 
   if (!artist)
     return (
-      <div className="text-3xl flex flex-col justify-center items-center gap-8">
+      <div className="text-xl text-white flex flex-col justify-center items-center gap-8">
         Getting related artist...{" "}
         <div className="text-3xl animate-bounce">🎶</div>
       </div>
     );
+
+  console.log("artist", artist);
   return (
-    <div className="mt-10 w-full ">
-      <img
-        width={300}
-        height={300}
-        alt="artist"
-        src={artist.images[0].url || ""}
-      />
-      <h2 className="text-3xl mb-5 mt-2">{artist?.name}</h2>
+    <div className=" w-full ">
+      <div className="flex gap-5">
+        <img
+          width={200}
+          height={200}
+          alt="artist"
+          src={artist.images[0].url || ""}
+        />
+        <div className="relative p-2 bg-opacity-20 bg-neutral-700 rounded-lg bg-transparent flex-1 flex gap-5 ">
+          <h2 className="text-2xl font-bold">
+            Popularity: {artist.popularity}
+          </h2>
+          <div className="flex flex-wrap justify-center ">
+            {" "}
+            <h2 className="text-2xl font-bold">Genres: </h2>
+            <p>
+              {artist.genres.map((genre, idx) => {
+                if (idx === artist.genres.length - 1) {
+                  return <span className="text-lg text-white">{genre}</span>;
+                }
+                return (
+                  <span className="text-lg text-white">{genre + ", "}</span>
+                );
+              })}
+            </p>
+          </div>
+        </div>
+      </div>
+      <h2 className="text-2xl text-white mb-5 mt-2 font-bold">
+        {artist?.name}
+      </h2>
       <div>
         {artist?.external_urls && (
-          <Link href={artist?.external_urls?.spotify}>
+          <Link href={artist?.external_urls?.spotify} target="_blank">
             {" "}
-            <button className="text-2xl rounded-lg p-2 bg-green-500 ">
-              Browse Discography on Spotify
+            <button className="text-xl rounded-lg p-2 bg-green-600 ">
+              Browse on Spotify
             </button>
           </Link>
         )}
         {/* artist track preview */}
         <div className="flex flex-col mt-5 mb-24 ">
-          <h2 className="text-xl mb-2">Top tracks - click to play preview</h2>
+          <h2 className="text-lg text-white mb-2">
+            Top tracks - click to play preview
+          </h2>
           {tracks &&
             tracks[0] !== null &&
             tracks?.map((track: Track) => {
@@ -120,7 +147,7 @@ export default function RelatedArtist({ id }: { id: Id }) {
                     playerRef.current.play();
                     setSelectedTrack(track);
                   }}
-                  className="flex gap-5 cursor-pointer flex-col border hover:bg-gray-900 hover:bg-opacity-70 w-full sm:flex-row items-center p-5"
+                  className="flex gap-5 cursor-pointer flex-col  hover:bg-[#2c2c2c]  hover:bg-opacity-70 w-full sm:flex-row items-center p-2"
                 >
                   <svg
                     xmlns="http://www.w3.org/2000/svg"
@@ -132,12 +159,12 @@ export default function RelatedArtist({ id }: { id: Id }) {
                     stroke-width="2"
                     stroke-linecap="round"
                     stroke-linejoin="round"
-                    class="lucide lucide-play"
+                    className="text-white lucide lucide-play"
                   >
                     <polygon points="5 3 19 12 5 21 5 3" />
                   </svg>
                   <img height={75} width={75} src={track.album.images[0].url} />
-                  <h3 className="text-white text-xl">{track.name}</h3>
+                  <h3 className="text-white text-md">{track.name}</h3>
                 </div>
               );
             })}

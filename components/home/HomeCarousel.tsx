@@ -22,7 +22,7 @@ export default function HomeCarousel({ items }: { items: ArtistImage[] }) {
       ? items.map((item: ArtistImage, idx: number) => ({
           id: idx,
           renderItem: (
-            <div className="w-full mx-2 slow-transition" key={idx}>
+            <div className="w-full mx-1 slow-transition" key={idx}>
               <div className="mt-16">
                 <div className="mb-2">
                   {item.url && (
@@ -32,6 +32,7 @@ export default function HomeCarousel({ items }: { items: ArtistImage[] }) {
                       alt=""
                       width={200}
                       height={150}
+                      loading="lazy"
                     />
                   )}
                 </div>
@@ -72,5 +73,5 @@ export default function HomeCarousel({ items }: { items: ArtistImage[] }) {
 
   // every 2 seconds, slide to next item
 
-  return <div className=" max-w-[300px]">{carouselFragment}</div>;
+  return <div className=" max-w-[250px]">{carouselFragment}</div>;
 }

@@ -10,7 +10,7 @@ type Props = {
 
 export default function DiscoverArtist({ params }: Props) {
   return (
-    <div className="w-full p-5 flex flex-col overflow-x-hidden justify-center items-center mt-16">
+    <div className="w-full p-5 flex flex-col overflow-x-hidden justify-center items-center">
       <RelatedArtist id={params?.artistId} />
     </div>
   );

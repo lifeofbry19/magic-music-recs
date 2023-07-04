@@ -43,7 +43,7 @@ export default function DiscoverDisplay() {
         <Search query={query} setQuery={setQuery} setArtists={setArtists} />
       </div>
       {loading && (
-        <div className="text-3xl flex flex-col justify-center items-center gap-8">
+        <div className="text-3xl flex flex-col justify-center items-center gap-8 text-white">
           Loading... <div className="text-3xl animate-bounce">🎶</div>
         </div>
       )}

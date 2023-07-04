@@ -6,12 +6,12 @@ import Image from "next/image";
 export function SignInButton() {
   const { data: session, status } = useSession();
 
-  if (status === "loading") return <button>...</button>;
+  if (status === "loading") return <button className="text-white">...</button>;
 
   if (status === "authenticated") {
     return (
       <Link href={`/dashboard`}>
-        <div className=" rounded-full h-12 w-12 flex justify-center items-center bg-indigo-700 text-white text-xl">
+        <div className=" rounded-full h-12 w-12 flex justify-center items-center bg-white text-black text-xl">
           {/* TS does not expect session to have a token property, which is custom logic for Spotify auth */}
           {/*@ts-ignore */}
           {session?.user?.name && session?.user.name[0]}
@@ -22,7 +22,7 @@ export function SignInButton() {
 
   return (
     <button
-      className="h-12 w-20 rounded-md bg-indigo-700 text-white"
+      className="h-12 w-20 rounded-md bg-white text-black"
       onClick={() => signIn("spotify")}
     >
       Sign In
@@ -36,8 +36,8 @@ export function DiscoverButton() {
   if (status === "authenticated") {
     return (
       <Link href={`/discover`}>
-        <div className=" rounded-md h-12 p-1 flex justify-center items-center bg-indigo-700 text-white text-xl">
-          Discover New Music
+        <div className=" h-12 p-2 flex rounded-lg justify-center items-center bg-indigo-500 text-white text-xl">
+          Discover
         </div>
       </Link>
     );
@@ -52,7 +52,10 @@ export function SignOutButton() {
   if (status === "unauthenticated") return <></>;
 
   return (
-    <button className="p-2 rounded-md bg-indigo-600 " onClick={() => signOut()}>
+    <button
+      className="p-2 rounded-md text-white bg-indigo-600 "
+      onClick={() => signOut()}
+    >
       Sign Out
     </button>
   );
