@@ -22,7 +22,7 @@ export default async function Dashboard() {
 
   if (!session) {
     return (
-      <div className="mt-24 w-full flex flex-col justify-center items-center gap-5">
+      <div className=" w-full flex flex-col justify-center items-center gap-5">
         <p className="text-white">You need to sign in</p>
         <SignInButton />
       </div>
@@ -30,7 +30,7 @@ export default async function Dashboard() {
   }
 
   return (
-    <div className="mt-24 w-full flex justify-center items-center">
+    <div className=" w-full flex justify-center items-center">
       {session && <DashboardDisplay user={session?.user} />}
     </div>
   );

@@ -3,8 +3,9 @@ import { SignOutButton } from "../navigation/Buttons";
 import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
 import PlaylistsDisplay from "./TopArtistsDisplay";
-import TopTracksDisplay from "../TopTracksDisplay";
+import TopTracksDisplay from "./TopTracksDisplay";
 import { mockData } from "../../utils/MockData";
+import TopArtistsDisplay from "./TopArtistsDisplay";
 
 interface Props {
   user: {
@@ -20,9 +21,9 @@ export default function DashboardDisplay({ user }: Props) {
   const [tracks, setTracks] = useState(mockData);
 
   useEffect(() => {
-    async function getPlaylists() {
+    async function getTopArtists() {
       const response = await fetch(
-        "https://api.spotify.com/v1/me/top/artists",
+        "https://api.spotify.com/v1/me/top/artists?time_range=short_term&limit=10",
         {
           method: "GET",
           headers: {
@@ -35,34 +36,42 @@ export default function DashboardDisplay({ user }: Props) {
       return data;
     }
 
-    async function getTracks() {
-      const response = await fetch("https://api.spotify.com/v1/me/top/tracks", {
-        method: "GET",
-        headers: {
-          Authorization: `Bearer ${session?.accessToken}`,
-        },
-      });
+    async function getTopTracks() {
+      const response = await fetch(
+        "https://api.spotify.com/v1/me/top/tracks?time_range=short_term&limit=10",
+        {
+          method: "GET",
+          headers: {
+            Authorization: `Bearer ${session?.accessToken}`,
+          },
+        }
+      );
       const data = await response.json();
 
       return data;
     }
 
     if (session) {
-      //getPlaylists().then((data) => setArtists(data.items));
-      //getTracks().then((data) => setTracks(data.items));
+      getTopArtists().then((data) => setArtists(data.items));
+      getTopTracks().then((data) => setTracks(data.items));
     }
   }, [session]);
 
   return (
-    <div>
-      <div className="w-full flex flex-col lg:flex-row justify-between gap-2 p-5 items-center">
-        {/* <h1 className="text-3xl font-bold">
-          Hello, {session?.user && session?.user.name} Here are your top artists{" "}
-        </h1> */}
+    <div className="px-10">
+      <div className="w-full flex flex-col lg:flex-row  gap-5  items-center">
+        <h1 className="text-3xl font-bold">
+          Hello, {session?.user && session?.user.name} Here are your top artists
+          and tracks{" "}
+        </h1>
         <SignOutButton />
       </div>
-      {artists && <PlaylistsDisplay artists={artists} />}
-      {tracks && <TopTracksDisplay tracks={tracks} />}
+      <div className="flex flex-col gap-10">
+        <h3>Top Artists</h3>
+        {artists && <TopArtistsDisplay artists={artists} />}
+        <h3>Top Tracks</h3>
+        {tracks && <TopTracksDisplay tracks={tracks} />}
+      </div>
     </div>
   );
 }
