@@ -1,11 +1,12 @@
 //@ts-nocheck
 "use client";
 import { useSession } from "next-auth/react";
-import { useEffect, useState, useCallback, useRef } from "react";
+import { useEffect, useState, useCallback, useRef, forwardRef } from "react";
 import debounce from "lodash/debounce";
 import Link from "next/link";
 import { getRandomArtist } from "@/lib/utils";
 import { carouselData } from "@/lib/carouselData";
+import AudioPlayer from "./AudioPlayer";
 
 type Id = string;
 
@@ -29,7 +30,9 @@ export default function RelatedArtist({ id }: { id: Id }) {
   const [tracks, setTracks] = useState<Tracks>(null);
   const [relatedArtistId, setRelatedArtistId] = useState(null);
   const [selectedTrack, setSelectedTrack] = useState(null);
+  const [isPlaying, setIsPlaying] = useState(false);
   const playerRef = useRef(null);
+  const rangeRef = useRef(null);
 
   //if (status === "loading") return <>Loading...</>;
 
@@ -134,51 +137,49 @@ export default function RelatedArtist({ id }: { id: Id }) {
         )}
         {/* artist track preview */}
         <div className="flex flex-col mt-5 mb-24 ">
-          <h2 className="text-lg text-white mb-2">
-            Top tracks - click to play preview
-          </h2>
+          <div className="flex lg:justify-between lg:pr-[50%] justify-start">
+            <h2 className="text-lg text-white mb-2">
+              Top tracks - click to play preview
+            </h2>
+            <p>album</p>
+          </div>
           {tracks &&
             tracks[0] !== null &&
             tracks?.map((track: Track) => {
+              console.log(track);
               return (
                 <div
                   onClick={() => {
-                    playerRef.current.src = selectedTrack.preview_url;
+                    playerRef.current.src = track.preview_url;
                     playerRef.current.play();
                     setSelectedTrack(track);
+                    setIsPlaying(true);
                   }}
-                  className="flex gap-5 cursor-pointer flex-col  hover:bg-[#2c2c2c]  hover:bg-opacity-70 w-full sm:flex-row items-center p-2"
+                  className="flex gap-5 cursor-pointer lg:pr-[50%] justify-start flex-col lg:justify-between  hover:bg-[#2c2c2c]  hover:bg-opacity-70 w-full sm:flex-row sm:items-center p-2"
                 >
-                  <svg
-                    xmlns="http://www.w3.org/2000/svg"
-                    width="24"
-                    height="24"
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="2"
-                    stroke-linecap="round"
-                    stroke-linejoin="round"
-                    className="text-white lucide lucide-play"
-                  >
-                    <polygon points="5 3 19 12 5 21 5 3" />
-                  </svg>
-                  <img height={75} width={75} src={track.album.images[0].url} />
-                  <h3 className="text-white text-md">{track.name}</h3>
+                  <div className="flex gap-5 items-center">
+                    {" "}
+                    <img
+                      height={75}
+                      width={75}
+                      src={track.album.images[0].url}
+                    />
+                    <h3 className="text-white text-md">{track.name}</h3>
+                  </div>
+                  <p className="sm:block hidden">{track.album.name}</p>
                 </div>
               );
             })}
         </div>
       </div>
       {/* Audio Player */}
-      <div className="w-screen z-50   fixed  p-5 bg-opacity-60 bottom-0 left-0 justify-center gap-12 h-16 bg-black flex flex-col sm:flex-row items-center">
-        <h3 className="text-xl">{selectedTrack?.name || ""}</h3>
-        <audio
-          ref={playerRef}
-          controls
-          src={selectedTrack?.preview_url || ""}
-        ></audio>
-      </div>
+      <AudioPlayer
+        selectedTrack={selectedTrack}
+        setSelectedTrack={setSelectedTrack}
+        isPlaying={isPlaying}
+        setIsPlaying={setIsPlaying}
+        ref={playerRef}
+      />
     </div>
   );
 }

@@ -25,7 +25,7 @@ export default function TracksDisplay({ tracks }: { tracks: any[] }) {
               onClick={() => setSelectedTrackIdx(idx)}
             >
               <img
-                src={track.album.images[0].url}
+                src={track.album?.images[0].url || ""}
                 className="h-48 w-44 "
                 alt={track.name}
               />

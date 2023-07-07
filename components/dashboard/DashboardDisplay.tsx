@@ -57,6 +57,12 @@ export default function DashboardDisplay({ user }: Props) {
     }
   }, [session]);
 
+  if (!tracks || !artists || status === "loading")
+    return (
+      <div>
+        <SignOutButton />
+      </div>
+    );
   return (
     <div className="px-10">
       <div className="w-full flex flex-col lg:flex-row  gap-5  items-center">
