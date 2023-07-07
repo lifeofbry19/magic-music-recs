@@ -6,6 +6,8 @@ import PlaylistsDisplay from "./TopArtistsDisplay";
 import TopTracksDisplay from "./TopTracksDisplay";
 import { mockData } from "../../utils/MockData";
 import TopArtistsDisplay from "./TopArtistsDisplay";
+import GenresChart from "./GenresChart";
+import { calculateTopGenres } from "@/utils/calculateTopGenres";
 
 interface Props {
   user: {
@@ -15,10 +17,16 @@ interface Props {
   };
 }
 
+type TopGenres = {
+  name: string;
+  percentage: number;
+}[];
+
 export default function DashboardDisplay({ user }: Props) {
   const { data: session, status } = useSession();
   const [artists, setArtists] = useState(null);
   const [tracks, setTracks] = useState(mockData);
+  const [topGenres, setTopGenres] = useState<TopGenres | null>(null);
 
   useEffect(() => {
     async function getTopArtists() {
@@ -52,31 +60,34 @@ export default function DashboardDisplay({ user }: Props) {
     }
 
     if (session) {
-      getTopArtists().then((data) => setArtists(data.items));
-      getTopTracks().then((data) => setTracks(data.items));
+      getTopArtists().then((data) => {
+        setArtists(data.items);
+        setTopGenres(calculateTopGenres(artists));
+      });
+
+      //getTopTracks().then((data) => setTracks(data.items));
     }
   }, [session]);
 
-  if (!tracks || !artists || status === "loading")
+  if (!artists || status === "loading")
     return (
       <div>
         <SignOutButton />
       </div>
     );
+
+  console.log(topGenres);
   return (
     <div className="px-10">
       <div className="w-full flex flex-col lg:flex-row  gap-5  items-center">
         <h1 className="text-3xl font-bold">
-          Hello, {session?.user && session?.user.name} Here are your top artists
-          and tracks{" "}
+          Hello, {session?.user && session?.user.name} Here are your top genres{" "}
         </h1>
         <SignOutButton />
       </div>
       <div className="flex flex-col gap-10">
-        <h3>Top Artists</h3>
-        {artists && <TopArtistsDisplay artists={artists} />}
-        <h3>Top Tracks</h3>
-        {tracks && <TopTracksDisplay tracks={tracks} />}
+        {topGenres && <GenresChart topGenres={topGenres} />}
+        {!topGenres && <div>Loading...</div>}
       </div>
     </div>
   );
