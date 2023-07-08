@@ -22,9 +22,12 @@ export default function HomeCarousel({ items }: { items: ArtistImage[] }) {
       ? items.map((item: ArtistImage, idx: number) => ({
           id: idx,
           renderItem: (
-            <div className="w-full mx-1 slow-transition" key={idx}>
-              <div className="mt-16">
-                <div className="mb-2">
+            <div
+              className=" mx-1 slow-transition p-4  flex shadow-md mt-16 group cursor-pointer hover:bg-[#2c2c2c] flex-col w-full max-w-[300px] items-center gap-5   bg-[#252525] bg-opacity-60 rounded-lg"
+              key={idx}
+            >
+              <div className="">
+                <div className="mb-2 mt-2">
                   {item.url && (
                     <img
                       placeholder="blur"

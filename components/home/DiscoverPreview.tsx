@@ -7,15 +7,18 @@ import { carouselData } from "@/lib/carouselData";
 export default function DiscoverPreview() {
   return (
     <Link
-      className="relative border-[1px] border-gray-500 hover:bg-opacity-20 hover:bg-neutral-700 rounded-lg bg-transparent flex-1 "
+      className="relative border-[1px] border-gray-500 hover:bg-opacity-20 hover:border-white  rounded-lg bg-transparent flex-1 "
       href="/discover"
     >
       <div className="rounded-xl   ">
         {/* <div className="rounded-xl bg-repeat bg-[180px]  inset-0 box-border border-none opacity-[.025] bg-transparent absolute "></div> */}
         <div className="h-[500px] w-full  p-5 text-white">
-          <h2 className="text-white text-2xl">
-            Select an artist you already love, we'll show you another
-          </h2>
+          <div className="w-full bg-indigo-500 -mx-5 p-2 rounded-br-md rounded-tr">
+            {" "}
+            <h2 className="text-white text-2xl">
+              Select an artist you already love, we'll show you another
+            </h2>
+          </div>
           <div className="overflow-hidden flex gap-4">
             <HomeCarousel items={carouselData} />
           </div>

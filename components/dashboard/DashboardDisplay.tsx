@@ -62,7 +62,9 @@ export default function DashboardDisplay({ user }: Props) {
     if (session) {
       getTopArtists().then((data) => {
         setArtists(data.items);
-        setTopGenres(calculateTopGenres(artists));
+        const topGenres = calculateTopGenres(data.items);
+
+        setTopGenres(topGenres);
       });
 
       //getTopTracks().then((data) => setTracks(data.items));
@@ -85,9 +87,13 @@ export default function DashboardDisplay({ user }: Props) {
         </h1>
         <SignOutButton />
       </div>
-      <div className="flex flex-col gap-10">
+      <div className="flex flex-col gap-10 mt-10">
         {topGenres && <GenresChart topGenres={topGenres} />}
-        {!topGenres && <div>Loading...</div>}
+        {!topGenres && (
+          <div className="flex justify-center items-center gap-5 text-3xl">
+            Loading... <div className="text-3xl animate-bounce ">🎶</div>
+          </div>
+        )}
       </div>
     </div>
   );
