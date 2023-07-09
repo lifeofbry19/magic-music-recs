@@ -34,7 +34,7 @@ export default function NavMenu() {
           height={100}
         />
       </Link>
-      <div className="flex gap-4">
+      <div className="flex justify-center items-center gap-4">
         <DiscoverButton />
         <ul className="flex justify-center text-black gap-5 items-center mr-5">
           <li>

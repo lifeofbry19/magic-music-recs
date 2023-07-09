@@ -1,7 +1,15 @@
 "use client";
 import { useRef } from "react";
-import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
-import { Doughnut } from "react-chartjs-2";
+import {
+  Chart as ChartJS,
+  CategoryScale,
+  LinearScale,
+  BarElement,
+  Title,
+  Tooltip,
+  Legend,
+} from "chart.js";
+import { Bar } from "react-chartjs-2";
 
 type TopGenres = {
   name: string;
@@ -9,7 +17,27 @@ type TopGenres = {
 }[];
 
 export default function GenresChart({ topGenres }: { topGenres: TopGenres }) {
-  ChartJS.register(ArcElement, Tooltip, Legend);
+  ChartJS.register(
+    CategoryScale,
+    LinearScale,
+    BarElement,
+    Title,
+    Tooltip,
+    Legend
+  );
+
+  const options = {
+    responsive: true,
+    plugins: {
+      legend: {
+        position: "top" as const,
+      },
+      title: {
+        display: true,
+        text: "Chart.js Bar Chart",
+      },
+    },
+  };
 
   const data = {
     labels: topGenres.map((genre) => genre.name),
@@ -35,5 +63,5 @@ export default function GenresChart({ topGenres }: { topGenres: TopGenres }) {
     ],
   };
 
-  return <Doughnut data={data} />;
+  return <Bar data={data} />;
 }

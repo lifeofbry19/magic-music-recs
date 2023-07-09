@@ -1,6 +1,9 @@
 import DiscoverDisplay from "@/components/discover/DiscoverDisplay";
+import { getServerSession } from "next-auth";
+import { SignInButton } from "@/components/navigation/Buttons";
 
-export default function Discover() {
+export default async function Discover() {
+  const session = await getServerSession();
   return (
     <div className="w-full p-5 flex flex-col justify-start items-start gap-4 lg:px-12 ">
       <h1 className="text-3xl text-white">
@@ -21,7 +24,14 @@ export default function Discover() {
           and we'll show you another artist you might like
         </em>
       </p>
-      <DiscoverDisplay />
+      {session?.user ? (
+        <DiscoverDisplay />
+      ) : (
+        <div className="flex w-full flex-col justify-center items-center gap-5">
+          <p className="text-white">You need to sign in to use this feature.</p>
+          <SignInButton />
+        </div>
+      )}
     </div>
   );
 }

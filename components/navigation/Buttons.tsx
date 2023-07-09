@@ -36,7 +36,7 @@ export function DiscoverButton() {
   if (status === "authenticated") {
     return (
       <Link href={`/discover`}>
-        <div className=" h-12 p-2 flex rounded-lg justify-center items-center bg-indigo-500 text-white text-xl">
+        <div className="  p-2 flex rounded-md justify-center items-center bg-indigo-600 text-white">
           Discover
         </div>
       </Link>

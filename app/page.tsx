@@ -1,6 +1,5 @@
 import DiscoverPreview from "@/components/home/DiscoverPreview";
 import StatsPreview from "@/components/home/StatsPreview";
-import HomeCarousel from "@/components/home/HomeCarousel";
 
 interface Props {
   params: any;

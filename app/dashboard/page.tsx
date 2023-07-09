@@ -23,7 +23,9 @@ export default async function Dashboard() {
   if (!session) {
     return (
       <div className=" w-full flex flex-col justify-center items-center gap-5">
-        <p className="text-white">You need to sign in</p>
+        <p className="text-white">
+          You need to sign in to see you profile stats.
+        </p>
         <SignInButton />
       </div>
     );
