@@ -2,15 +2,22 @@
 import { useCallback, useState } from "react";
 import Search from "./Search";
 import ArtistCard from "./ArtistCard";
-import { mockData } from "../../utils/MockData";
 import { useSession } from "next-auth/react";
 import { useEffect } from "react";
 import debounce from "lodash/debounce";
 import SkeletonCard from "./SkeletonCard";
 
+type Artist = {
+  id: string;
+  name: string;
+  images: { url: string }[];
+  genres: string[];
+  popularity: number;
+};
+
 export default function DiscoverDisplay() {
   const [query, setQuery] = useState("");
-  const [artists, setArtists] = useState(null);
+  const [artists, setArtists] = useState<Artist[] | null>(null);
   const [loading, setLoading] = useState(false);
   const { data: session, status } = useSession();
 
@@ -43,20 +50,16 @@ export default function DiscoverDisplay() {
         {" "}
         <Search query={query} setQuery={setQuery} setArtists={setArtists} />
       </div>
-      {/* {loading && (
-        <div className="text-3xl flex flex-col justify-center items-center gap-8 text-white">
-          Loading... <div className="text-3xl animate-bounce">🎶</div>
-        </div>
-      )} */}
       <div className="flex flex-wrap justify-center items-center w-full gap-5">
         {loading &&
           !artists &&
+          // @ts-ignore
           [...Array(10).keys()].map((_, idx) => {
             return <SkeletonCard key={idx} />;
           })}
 
         {artists &&
-          artists.map((artist: any) => <ArtistCard artist={artist} />)}
+          artists.map((artist: Artist) => <ArtistCard artist={artist} />)}
       </div>
     </div>
   );

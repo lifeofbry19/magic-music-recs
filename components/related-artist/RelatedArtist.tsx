@@ -4,9 +4,10 @@ import { useSession } from "next-auth/react";
 import { useEffect, useState, useCallback, useRef, forwardRef } from "react";
 import debounce from "lodash/debounce";
 import Link from "next/link";
-import { getRandomArtist } from "@/lib/utils";
+import { getRandomArtist } from "@/lib/getRandomArtist";
 import { carouselData } from "@/lib/carouselData";
 import AudioPlayer from "./AudioPlayer";
+import SkeletonRelatedArtist from "./SkeletonRelatedArtist";
 
 type Id = string;
 
@@ -66,12 +67,6 @@ export default function RelatedArtist({ id }: { id: Id }) {
     setTracks(json.tracks);
   }
 
-  // const debouncedGetRelatedArtists = useCallback(
-  //   debounce(getRelatedArtists, 1500),
-  //   []
-  // );
-  // const debouncedGetTracks = useCallback(debounce(getArtistTracks, 1500), []);
-
   useEffect(() => {
     if (artist) return;
     if (session && id) {
@@ -85,15 +80,8 @@ export default function RelatedArtist({ id }: { id: Id }) {
     }
   }, [session, relatedArtistId]);
 
-  if (!artist)
-    return (
-      <div className="text-xl text-white flex flex-col justify-center items-center gap-8">
-        Getting related artist...{" "}
-        <div className="text-3xl animate-bounce">🎶</div>
-      </div>
-    );
+  if (!artist) return <SkeletonRelatedArtist />;
 
-  console.log("artist", artist);
   return (
     <div className=" w-full ">
       <div className="flex gap-5">

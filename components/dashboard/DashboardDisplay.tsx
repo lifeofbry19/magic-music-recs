@@ -78,9 +78,8 @@ export default function DashboardDisplay({ user }: Props) {
       </div>
     );
 
-  console.log(topGenres);
   return (
-    <div className="px-10">
+    <div className="px-10 mt-5">
       <div className="w-full flex flex-col lg:flex-row  gap-5  items-center">
         <h1 className="text-3xl font-bold">
           Hello, {session?.user && session?.user.name} Here are your top genres{" "}
