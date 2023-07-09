@@ -3,22 +3,8 @@ import { SignInButton, SignOutButton } from "@/components/navigation/Buttons";
 import { getServerSession } from "next-auth";
 import DashboardDisplay from "@/components/dashboard/DashboardDisplay";
 
-async function getPlaylists(session) {
-  const response = await fetch("/api/playlists", {
-    method: "GET",
-    headers: {
-      Authorization: `Bearer ${session.accessToken}`,
-    },
-  });
-  const data = await response.json();
-  return data;
-}
-
 export default async function Dashboard() {
   const session = await getServerSession();
-
-  //const playlists = await getPlaylists(session);
-  //console.log(playlists);
 
   if (!session) {
     return (

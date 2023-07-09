@@ -23,7 +23,7 @@ export default function HomeCarousel({ items }: { items: ArtistImage[] }) {
           id: idx,
           renderItem: (
             <div
-              className=" mx-1 slow-transition p-4  flex shadow-md mt-16 group cursor-pointer hover:bg-[#2c2c2c] flex-col w-full max-w-[300px] items-center gap-5   bg-[#252525] bg-opacity-60 rounded-lg"
+              className=" mx-1 slow-transition p-4  flex shadow-md mt-12 group cursor-pointer hover:bg-[#2c2c2c] flex-col w-full max-w-[300px] items-center gap-5   bg-[#252525] bg-opacity-60 rounded-lg"
               key={idx}
             >
               <div className="">
