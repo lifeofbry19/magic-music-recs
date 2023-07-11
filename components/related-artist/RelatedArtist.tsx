@@ -8,6 +8,7 @@ import { getRandomArtist } from "@/lib/getRandomArtist";
 import { carouselData } from "@/lib/carouselData";
 import AudioPlayer from "./AudioPlayer";
 import SkeletonRelatedArtist from "./SkeletonRelatedArtist";
+import { useQuery } from "react-query";
 
 type Id = string;
 
@@ -27,15 +28,12 @@ type Tracks = Track[] | null;
 
 export default function RelatedArtist({ id }: { id: Id }) {
   const { data: session, status } = useSession();
-  const [artist, setArtist] = useState<Artist>(null);
-  const [tracks, setTracks] = useState<Tracks>(null);
-  const [relatedArtistId, setRelatedArtistId] = useState(null);
+  // const [artist, setArtist] = useState<Artist>(null);
+  // const [tracks, setTracks] = useState<Tracks>(null);
+  // const [relatedArtistId, setRelatedArtistId] = useState(null);
   const [selectedTrack, setSelectedTrack] = useState(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const playerRef = useRef(null);
-  const rangeRef = useRef(null);
-
-  //if (status === "loading") return <>Loading...</>;
 
   async function getRelatedArtists(id: string) {
     if (!id) return;
@@ -48,8 +46,9 @@ export default function RelatedArtist({ id }: { id: Id }) {
     });
     const json = await res.json();
     const randomArtist = getRandomArtist(json.artists);
-    setArtist(randomArtist);
-    setRelatedArtistId(randomArtist?.id);
+    // setArtist(randomArtist);
+    // setRelatedArtistId(randomArtist?.id);
+    return randomArtist;
   }
 
   async function getArtistTracks(id: string) {
@@ -63,22 +62,34 @@ export default function RelatedArtist({ id }: { id: Id }) {
       },
     });
     const json = await res.json();
-
-    setTracks(json.tracks);
+    // setTracks(json.tracks);
+    return json.tracks;
   }
 
-  useEffect(() => {
-    if (artist) return;
-    if (session && id) {
-      getRelatedArtists(id);
-    }
-  }, [session, id]);
-  useEffect(() => {
-    if (tracks) return;
-    if (session && relatedArtistId) {
-      getArtistTracks(relatedArtistId);
-    }
-  }, [session, relatedArtistId]);
+  const { data: artist, status: relatedArtistStatus } = useQuery(
+    ["relatedArtist", id],
+    () => getRelatedArtists(id),
+    { enabled: !!id }
+  );
+
+  const { data: tracks, status: relatedTracksStatus } = useQuery(
+    ["relatedArtistTracks", artist?.id],
+    () => getArtistTracks(artist?.id),
+    { enabled: !!artist?.id }
+  );
+
+  // useEffect(() => {
+  //   if (artist) return;
+  //   if (session && id) {
+  //     getRelatedArtists(id);
+  //   }
+  // }, [session, id]);
+  // useEffect(() => {
+  //   if (tracks) return;
+  //   if (session && relatedArtistId) {
+  //     getArtistTracks(relatedArtistId);
+  //   }
+  // }, [session, relatedArtistId]);
 
   if (!artist) return <SkeletonRelatedArtist />;
 
@@ -110,7 +121,7 @@ export default function RelatedArtist({ id }: { id: Id }) {
             </p>
           </div>
         </div>
-      </div>
+      </div>{" "}
       <h2 className="text-2xl text-white mb-5 mt-2 font-bold">
         {artist?.name}
       </h2>
@@ -123,6 +134,9 @@ export default function RelatedArtist({ id }: { id: Id }) {
             </button>
           </Link>
         )}
+        {/* <button onClick={() => } className="p-2 bg-indigo-500 rounded-md text-white">
+          Get New Related Artist
+        </button> */}
         {/* artist track preview */}
         <div className="flex flex-col mt-5 mb-24 ">
           <div className="flex lg:justify-between lg:pr-[50%] justify-start">

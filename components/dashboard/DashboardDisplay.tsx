@@ -2,7 +2,6 @@
 import { SignOutButton } from "../navigation/Buttons";
 import { useSession } from "next-auth/react";
 import { useEffect, useState } from "react";
-import { mockData } from "../../utils/MockData";
 import GenresChart from "./GenresChart";
 import { calculateTopGenres } from "@/utils/calculateTopGenres";
 import StatsTabs from "./StatsTabs";
@@ -23,7 +22,6 @@ type TopGenres = {
 export default function DashboardDisplay({ user }: Props) {
   const { data: session, status } = useSession();
   const [artists, setArtists] = useState(null);
-  const [tracks, setTracks] = useState(mockData);
   const [topGenres, setTopGenres] = useState<TopGenres | null>(null);
   const [selectedTab, setSelectedTab] = useState(1);
 
@@ -42,21 +40,6 @@ export default function DashboardDisplay({ user }: Props) {
     return data;
   }
   useEffect(() => {
-    async function getTopTracks() {
-      const response = await fetch(
-        "https://api.spotify.com/v1/me/top/tracks?time_range=short_term&limit=10",
-        {
-          method: "GET",
-          headers: {
-            Authorization: `Bearer ${session?.accessToken}`,
-          },
-        }
-      );
-      const data = await response.json();
-
-      return data;
-    }
-
     if (session) {
       getTopArtists("short_term").then((data) => {
         setArtists(data.items);

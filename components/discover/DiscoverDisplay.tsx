@@ -19,7 +19,7 @@ export default function DiscoverDisplay() {
   const [query, setQuery] = useState("");
   const [artists, setArtists] = useState<Artist[] | null>(null);
   const [loading, setLoading] = useState(false);
-  const { data: session, status } = useSession();
+  const { data: session, status: sessionStatus } = useSession();
 
   async function searchArtists(query: string) {
     if (query === "") return;
@@ -37,6 +37,7 @@ export default function DiscoverDisplay() {
     setArtists(json.artists.items);
     setLoading(false);
   }
+
   const debouncedSearch = useCallback(debounce(searchArtists, 750), []);
 
   useEffect(() => {
